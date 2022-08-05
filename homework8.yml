@@ -21,10 +21,10 @@
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
         dest: /opt/
     - name: Ensure maven package
-      command: mvn -f /opt/boxfuse-sample-java-war-hello/pom.xml package
+      command: mvn -f /opt/pom.xml package
     - name: Store artifact file into /opt/build
       fetch:
-        src: /opt/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        src: /opt/target/hello-1.0.war
         dest: /opt/build/hello-1.0.war
 
 
