@@ -1,0 +1,49 @@
+---
+- name: Install build slave1
+  hosts: build
+  become: yes
+
+  tasks:
+    - name: Ensure java package is present
+      apt:
+        name: default-jdk
+        state: present
+    - name: Ensure maven package is present
+      apt:
+        name: maven
+        state: present
+    - name: Ensure git package is present
+      apt:
+        name: git
+        state: present
+    - git: Ensure git clon
+      clone: yes
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /opt/
+    - name: Ensure maven package
+      command: mvn -f /opt/boxfuse-sample-java-war-hello/pom.xml package
+    - name: Store artifact file into /opt/build
+      fetch:
+        src: /opt/boxfuse-sample-java-war-hello/target/hello-1.0.war
+        dest: /opt/build/hello-1.0.war
+
+
+
+- name: install prod slave2
+  hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Ensure tomcat package
+      apt:
+        name: tomcat
+        state: present
+    - name: Ensure tomcat service is started
+      service:
+        name: tomcat
+        state: started
+    - name: Copy artifact file into tomcat
+      copy:
+        src: /opt/build/hello-1.0.war
+        dest: /usr/local/tomcat/webapps/hello-1.0.war
+
