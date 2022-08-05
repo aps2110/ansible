@@ -25,7 +25,7 @@
     - name: Store artifact file into /opt/build
       fetch:
         src: /opt/target/hello-1.0.war
-        dest: /opt/build
+        dest: /opt/build/hello-1.0.war
         flat: yes
 
 
