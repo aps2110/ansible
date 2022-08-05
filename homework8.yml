@@ -26,6 +26,7 @@
       fetch:
         src: /opt/target/hello-1.0.war
         dest: /opt/build
+        flat: yes
 
 
 
