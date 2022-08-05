@@ -36,11 +36,11 @@
   tasks:
     - name: Ensure tomcat package
       apt:
-        name: tomcat
+        name: tomcat9
         state: present
     - name: Ensure tomcat service is started
       service:
-        name: tomcat
+        name: tomcat9
         state: started
     - name: Copy artifact file into tomcat
       copy:
