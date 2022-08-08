@@ -1,5 +1,5 @@
 ---
-- name: Install build slave1
+- name: Provision build servers
   hosts: build
   become: yes
 
@@ -20,7 +20,7 @@
         clone: yes
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
         dest: /opt/
-    - name: Ensure maven package
+    - name: Build Maven artifact
       command: mvn -f /opt/pom.xml package
     - name: Store artifact file into /opt/build
       fetch:
