@@ -22,17 +22,19 @@
         dest: /opt/
     - name: Build Maven artifact
       command: mvn -f /opt/pom.xml package
-    - name: Store artifact file into /opt/build
-      fetch:
-        src: /opt/target/hello-1.0.war
-        dest: /opt/build/hello-1.0.war
-        flat: yes
+    - name: Synchronization using rsync protocol on delegate host (pull)
+      synchronize:
+        mode: pull
+        src: rsync://opt/target/hello-1.0.war
+        dest: /var/lib/tomcat9/webapps/hello-1.0.war
+      delegate_to: 51.250.107.114
 
 
 
 
-- name: install prod slave2
-  hosts: webserver
+
+- name: Provision prod
+  hosts: web
   become: yes
 
   tasks:
@@ -44,8 +46,3 @@
       service:
         name: tomcat9
         state: started
-    - name: Copy artifact file into tomcat
-      copy:
-        src: /opt/build/hello-1.0.war
-        dest: /var/lib/tomcat9/webapps/hello-1.0.war
-
