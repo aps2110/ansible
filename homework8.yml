@@ -1,5 +1,5 @@
 ---
-- name: Provision build servers
+- name: Provision build
   hosts: build
   become: yes
 
