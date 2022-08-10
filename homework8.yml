@@ -43,7 +43,5 @@
         state: started
     - name: Synchronization using rsync protocol on delegate host (pull)
       synchronize:
-        mode: pull
-        src: rsync://opt/target/hello-1.0.war
-        dest: /var/lib/tomcat9/webapps/hello-1.0.war
-      delegate_to: 51.250.107.114
+        src: /opt/target/
+        dest: /var/lib/tomcat9/webapps/
