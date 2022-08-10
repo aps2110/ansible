@@ -43,5 +43,5 @@
         state: started
     - name: Synchronization using rsync protocol on delegate host (pull)
       synchronize:
-        src: /opt/target/
-        dest: /var/lib/tomcat9/webapps/
+        src: /var/lib/tomcat9/webapps/
+        dest: /opt/target/
